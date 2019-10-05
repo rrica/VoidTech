@@ -72,14 +72,31 @@
                         {
                          "name":"action",
                          "type":"string",
-                         "value":"lever-001"
+                         "value":"lever-002"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":20.7612456747405,
-                 "x":15.8592848904268,
-                 "y":99.7693194925029
+                 "x":123.125720876586,
+                 "y":100.922722029988
+                }, 
+                {
+                 "height":12.1107,
+                 "id":5,
+                 "name":"lever",
+                 "properties":[
+                        {
+                         "name":"action",
+                         "type":"string",
+                         "value":"lever-001"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":20.7612,
+                 "x":17.0127102652826,
+                 "y":99.4809821799308
                 }],
          "offsetx":0,
          "offsety":-0.288350634371398,
@@ -88,9 +105,21 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2684354597, 2684354597, 0, 0, 0, 0, 0, 0],
+         "height":12,
+         "id":7,
+         "name":"doors",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":12,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":5,
+ "nextlayerid":8,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -107,6 +136,38 @@
          "spacing":0,
          "tilecount":36,
          "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":2,
+         "firstgid":37,
+         "image":"door.png",
+         "imageheight":16,
+         "imagewidth":32,
+         "margin":0,
+         "name":"door",
+         "spacing":0,
+         "tilecount":2,
+         "tileheight":16,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"collision",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1,
+                 "properties":[
+                        {
+                         "name":"collision",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }],
          "tilewidth":16
         }],
  "tilewidth":16,

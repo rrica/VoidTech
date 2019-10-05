@@ -3,6 +3,7 @@ import { Scene } from 'phaser';
 import mapJson from './assets/ship2.json';
 import tiles from './assets/Tileset.png';
 import player_acting from './assets/Dave acting.png'
+import door from './assets/door.png'
 
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
@@ -28,6 +29,10 @@ export default class GameScene extends Scene {
 		this.load.spritesheet(PLAYER_TILESET_KEY,
 			player_acting,
 			{ frameWidth: 32, frameHeight: 32 }
+		);
+		this.load.spritesheet('door',
+			door,
+			{ frameWidth: 16, frameHeight: 16 }
 		);
 		this.load.scenePlugin('Dialog', DialogPlugin);
 	}
@@ -62,13 +67,18 @@ export default class GameScene extends Scene {
 		
 		const map = this.make.tilemap({ key: 'map' });
 		const tileset = map.addTilesetImage('Tileset', 'tiles');
+		const doorTileset = map.addTilesetImage('door');
 		const walkableLayer = map.createStaticLayer('floor', tileset, 0, 0);
 		const wallLayer = map.createStaticLayer('walls', tileset, 0, 0);
 		wallLayer.setCollisionBetween(1, 999);
+		this.doorLayer = map.createDynamicLayer('doors', doorTileset, 0, 0);
+		this.doorLayer.setCollisionByProperty({ collision: true });
+
 
 		
 		this.player = new Player(this);
 		this.physics.add.collider(this.player.sprite, wallLayer);
+		this.physics.add.collider(this.player.sprite, this.doorLayer);
 
 		this.initializeObjects(map);
 
