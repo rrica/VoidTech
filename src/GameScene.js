@@ -33,7 +33,8 @@ export default class GameScene extends Scene {
 	}
 
 	initializeObjects(tilemap) {
-		this.objects = this.physics.add.group();
+		this.speechTriggers = this.physics.add.group();
+		this.levers = this.physics.add.group();
 
 		tilemap.getObjectLayer('objects').objects.forEach(obj => {
 			const sprite = this.physics.add.sprite(obj.x, obj.y, null);
@@ -46,7 +47,12 @@ export default class GameScene extends Scene {
 				sprite.setData(prop.name, prop.value);
 			})
 
-			this.objects.add(sprite);
+			if (obj.name === "trigger") {
+				this.speechTriggers.add(sprite);
+			}
+			else if (obj.name === "lever") {
+				this.levers.add(sprite);
+			}
 		});
 	}
 	

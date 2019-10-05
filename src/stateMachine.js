@@ -1,5 +1,6 @@
 import dialog from './dialog/dialog.js';
 import constants from './constants.js';
+import levers from './levers.js';
 
 const STATES = {
     normal: 'normal',
@@ -47,9 +48,13 @@ class StateMachine {
         }
 
         if (Phaser.Input.Keyboard.JustDown(space)) {
-            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.objects, (left, right) => {
+            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.speechTriggers, (left, right) => {
                 const trigger = left === this.player.sprite ? right : left;
                 dialog.show(trigger.getData('action'));
+            });
+            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.levers, (left, right) => {
+                const trigger = left === this.player.sprite ? right : left;
+                levers[trigger.getData('action')]();
             });
         }
     }

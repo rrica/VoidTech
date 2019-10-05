@@ -63,6 +63,23 @@
                  "width":19.4233404844291,
                  "x":124.51555005767,
                  "y":59.2041434832757
+                }, 
+                {
+                 "height":12.1107266435986,
+                 "id":3,
+                 "name":"lever",
+                 "properties":[
+                        {
+                         "name":"action",
+                         "type":"string",
+                         "value":"lever-001"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":20.7612456747405,
+                 "x":15.8592848904268,
+                 "y":99.7693194925029
                 }],
          "offsetx":0,
          "offsety":-0.288350634371398,
@@ -73,7 +90,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":3,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
