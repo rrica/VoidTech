@@ -46,11 +46,7 @@ export default class Player {
 
         if (Phaser.Input.Keyboard.JustDown(space)) {
             if (this.dialogs.active()) {
-                debugger;
                 this.dialogs.clear();
-            }
-            else {
-                this.dialogs.show({text: 'What can I do for you?'});
             }
         }
     }

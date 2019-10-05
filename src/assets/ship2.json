@@ -24,9 +24,56 @@
          "width":12,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"objects",
+         "objects":[
+                {
+                 "height":15.0980392156863,
+                 "id":1,
+                 "name":"trigger",
+                 "properties":[
+                        {
+                         "name":"action",
+                         "type":"string",
+                         "value":"speech-002"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":19.4232987312572,
+                 "x":112.456747404844,
+                 "y":161.476355247982
+                }, 
+                {
+                 "height":15.963108650519,
+                 "id":2,
+                 "name":"trigger",
+                 "properties":[
+                        {
+                         "name":"action",
+                         "type":"string",
+                         "value":"speech-001"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":19.4233404844291,
+                 "x":138.068029873126,
+                 "y":33.5409370242215
+                }],
+         "offsetx":0,
+         "offsety":-0.288350634371398,
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":1,
+ "nextlayerid":5,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

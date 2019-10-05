@@ -27,6 +27,23 @@ export default class GameScene extends Scene {
 		);
 		this.load.scenePlugin('Dialog', DialogPlugin);
 	}
+
+	initializeObjects(tilemap) {
+		this._objects = this.physics.add.group();
+
+		tilemap.getObjectLayer('objects').objects.forEach(obj => {
+			const sprite = this.physics.add.sprite(obj.x, obj.y, null);
+			sprite.setDisplaySize(obj.width, obj.height);
+			sprite.setOrigin(0, 0);
+
+			// copy custom properties
+			obj.properties.forEach(prop => {
+				sprite.setData(prop.name, prop.value);
+			})
+
+			this._objects.add(sprite);
+		});
+	}
 	
 	create() {
 		this.physics.world.TILE_BIAS = 8;
@@ -38,8 +55,38 @@ export default class GameScene extends Scene {
 		const wallLayer = map.createStaticLayer('walls', tileset, 0, 0);
 		wallLayer.setCollisionBetween(1, 999);
 
+		
 		this._player = new Player(this);
 		this.physics.add.collider(this._player.sprite, wallLayer);
+
+		this.initializeObjects(map);
+
+		//TODO: Move following code (object logic) to better place
+
+		const showDialog = (config) => {
+			if (!this.Dialog.active()) {
+				this.Dialog.show(config);
+			}
+		}
+
+		this.physics.add.overlap(
+			this._player.sprite, 
+			this._objects, 
+			(a, b) => {
+				const action = b.getData('action');
+				if (action) {
+					switch (action) {
+						case 'speech-001': 
+							showDialog({text: 'Hello Dave!'});
+							break;
+						case 'speech-002':
+							showDialog({text: 'What can I do for you?'});
+							break;
+						default:
+							console.warn('Unknown action')
+					}
+				}
+			});
 	}
 
 	update(time, delta) {
