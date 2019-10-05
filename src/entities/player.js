@@ -10,7 +10,7 @@ export default class Player {
         this.sprite = scene.physics.add.sprite(START_X, START_Y, PLAYER_TILESET_KEY);
         this.sprite.setSize(16, 16);
         this.createAnimations(scene);
-        this.__cursorkeys = scene.input.keyboard.createCursorKeys();
+        this.cursorkeys = scene.input.keyboard.createCursorKeys();
         this.dialogs = scene.Dialog;
         this.scene = scene;
     }
@@ -31,7 +31,7 @@ export default class Player {
     }
 
     _updateMovement() {
-        const {left, right, up, down, space} = this.__cursorkeys;
+        const {left, right, up, down, space} = this.cursorkeys;
 
         if (!(left.isDown || right.isDown)) {
             this.sprite.setVelocityX(0);
@@ -73,7 +73,7 @@ export default class Player {
     }
 
     update() {
-        this._updateMovement();
+        // this._updateMovement();
         this._updateAnimation();
     }
 }

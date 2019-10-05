@@ -1,4 +1,6 @@
 import dialogJson from './dialog.json';
+import stateMachine from '../stateMachine.js';
+import { STATES } from '../stateMachine.js';
 
 class Dialog {
     init (dialogPlugin, scene, player) {
@@ -13,6 +15,7 @@ class Dialog {
     show(key) {
         this.dialogContainer.style.display = 'block';
         this.dialogText.innerHTML = dialogJson[key].text;
+        stateMachine.setState(STATES.dialog);
     }
 
     hide() {

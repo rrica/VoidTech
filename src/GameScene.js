@@ -10,6 +10,8 @@ import { DialogPlugin } from './plugins/dialog.js';
 
 import dialog from './dialog/dialog.js';
 
+import stateMachine from './stateMachine.js';
+
 export default class GameScene extends Scene {
 	constructor() {
 		super({ key: GameScene.KEY });
@@ -66,6 +68,8 @@ export default class GameScene extends Scene {
 
 		dialog.init(this.Dialog, this, this.player);
 
+		stateMachine.init(this.player);
+
 		//TODO: Move following code (object logic) to better place
 
 		// const showDialog = (config) => {
@@ -95,6 +99,7 @@ export default class GameScene extends Scene {
 	}
 
 	update(time, delta) {
+		stateMachine.update();
 		this.player.update();
 	}
 }
