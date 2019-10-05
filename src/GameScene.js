@@ -32,6 +32,7 @@ export default class GameScene extends Scene {
 		undestructibleLayer.setCollisionByProperty({ collision: true });
 
 		this._player = new Player(this);
+		this.physics.add.collider(this._player.arcadeImage, undestructibleLayer);
 	}
 	
 	update(time, delta) {

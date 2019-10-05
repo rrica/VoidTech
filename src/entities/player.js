@@ -4,7 +4,8 @@ const SPEED = 16;
 
 export default class Player {
 	constructor(scene) {
-        this.__image = scene.physics.add.image(START_X, START_Y, 'chara');
+        // An Arcade Physics Image is an Image with an Arcade Physics body and related components.
+        this.arcadeImage = scene.physics.add.image(START_X, START_Y, 'chara');
         // this.__image.setInteractive();
         this.__cursorkeys = scene.input.keyboard.createCursorKeys();
     }
@@ -13,17 +14,17 @@ export default class Player {
         const {left, right, up, down, space} = this.__cursorkeys;
 
         if (!(left.isDown || right.isDown)) {
-            this.__image.setVelocityX(0);
+            this.arcadeImage.setVelocityX(0);
         }
         else {
-            this.__image.setVelocityX(left.isDown ? -SPEED : SPEED);
+            this.arcadeImage.setVelocityX(left.isDown ? -SPEED : SPEED);
         }
 
         if (!(up.isDown || down.isDown)) {
-            this.__image.setVelocityY(0);
+            this.arcadeImage.setVelocityY(0);
         }
         else {
-            this.__image.setVelocityY(up.isDown ? -SPEED : SPEED);
+            this.arcadeImage.setVelocityY(up.isDown ? -SPEED : SPEED);
         }
 
         if (space.isDown) {
