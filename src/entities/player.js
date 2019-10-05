@@ -1,6 +1,6 @@
 const START_X = 40;
 const START_Y = 80;
-const SPEED = 16;
+const SPEED = 32;
 export const PLAYER_TILESET_KEY = 'chara';
 
 export default class Player {

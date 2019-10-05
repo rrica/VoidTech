@@ -29,11 +29,12 @@ export default class GameScene extends Scene {
 
 		const map = this.make.tilemap({ key: 'map' });
 		const tileset = map.addTilesetImage('Tileset', 'tiles');
-		const undestructibleLayer = map.createStaticLayer('Tile Layer 1', tileset, 0, 0);
-		undestructibleLayer.setCollisionByProperty({ collision: true });
+		const walkableLayer = map.createStaticLayer('floor', tileset, 0, 0);
+		const wallLayer = map.createStaticLayer('walls', tileset, 0, 0);
+		wallLayer.setCollisionBetween(1, 999);
 
 		this._player = new Player(this);
-		this.physics.add.collider(this._player.sprite, undestructibleLayer);
+		this.physics.add.collider(this._player.sprite, wallLayer);
 	}
 	
 	update(time, delta) {
