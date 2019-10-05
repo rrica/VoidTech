@@ -8,8 +8,9 @@ const config = {
 	scale: {
 		parent: 'phaser',
 		mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
-		width: 64,
-		height: 64,
+		zoom: 1.2,
+		width: 320,
+		height: 240,
 		max: {
 			width: 640,
 			height: 640

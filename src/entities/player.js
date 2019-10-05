@@ -1,5 +1,5 @@
-const START_X = 4;
-const START_Y = 4;
+const START_X = 40;
+const START_Y = 80;
 const SPEED = 16;
 export const PLAYER_TILESET_KEY = 'chara';
 
