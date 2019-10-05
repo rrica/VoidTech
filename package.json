@@ -1,5 +1,5 @@
 {
-  "name": "phaser3-webpack-template",
+  "name": "void-tech",
   "version": "0.0.1",
   "description": "",
   "private": true,
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/drusin/phaser3-webpack-template.git"
+    "url": "git+https://github.com/drusin/VoidTech.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/drusin/phaser3-webpack-template/issues"
+    "url": "https://github.com/drusin/VoidTech/issues"
   },
-  "homepage": "https://github.com/drusin/phaser3-webpack-template#readme",
+  "homepage": "https://github.com/drusin/VoidTech#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "file-loader": "^4.2.0",
