@@ -18,9 +18,9 @@ export default class GameScene extends Scene {
 		this.load.image('tiles', tiles);
 		this.load.tilemapTiledJSON('map', mapJson);
 		this.load.spritesheet('chara',
-        chara,
-        { frameWidth: 8, frameHeight: 8 }
-    );
+			chara,
+			{ frameWidth: 8, frameHeight: 8 }
+		);
 	}
 	
 	create() {
@@ -30,7 +30,7 @@ export default class GameScene extends Scene {
 		const map = this.make.tilemap({ key: 'map' });
 		const tileset = map.addTilesetImage('brick-sheet', 'tiles');
 		const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
-    	undestructibleLayer.setCollisionByProperty({ collision: true });
+		undestructibleLayer.setCollisionByProperty({ collision: true });
 
 
 		this._drops = this.physics.add.group();
