@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 import mapJson from './assets/map.json';
 import tiles from './assets/brick-sheet.png';
 import chara from './assets/textures.png'
+import Player from './entities/player.js';
 
 export default class GameScene extends Scene {
 	constructor() {
@@ -32,19 +33,12 @@ export default class GameScene extends Scene {
 		const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
 		undestructibleLayer.setCollisionByProperty({ collision: true });
 
-
 		this._drops = this.physics.add.group();
-		const player = this.physics.add.image(4, 4, 'chara');
-		player.setInteractive();
-		
-		this.input.setDraggable(player);
-		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-			gameObject.x = dragX;
-			gameObject.y = dragY;
-		});
+		const player = new Player(this);
 	}
 	
 	update(time, delta) {
+		// console.log(`update happened ${time} ${delta}`)
 		this._count += delta;
 		if (this._count > 800) {
 			this._drops.create(Math.floor(Math.random() * 800) + 100, 50).setVelocityY(300);
