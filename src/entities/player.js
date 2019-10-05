@@ -9,6 +9,7 @@ export default class Player {
         this.createAnimations(scene);
         // this.__image.setInteractive();
         this.__cursorkeys = scene.input.keyboard.createCursorKeys();
+        this.dialogs = scene.Dialog;
     }
 
     createAnimations(scene) {
@@ -43,8 +44,14 @@ export default class Player {
             this.sprite.setVelocityY(up.isDown ? -SPEED : SPEED);
         }
 
-        if (space.isDown) {
-            console.log('Interaction!')
+        if (Phaser.Input.Keyboard.JustDown(space)) {
+            if (this.dialogs.active()) {
+                debugger;
+                this.dialogs.clear();
+            }
+            else {
+                this.dialogs.show({text: 'What can I do for you?'});
+            }
         }
     }
 

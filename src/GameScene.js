@@ -6,10 +6,12 @@ import player_acting from './assets/Dave acting.png'
 
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
+import { DialogPlugin } from './plugins/dialog.js';
 
 export default class GameScene extends Scene {
 	constructor() {
 		super({ key: GameScene.KEY });
+		this.playerCollider = null;
 	}
 	
 	static get KEY() {
@@ -23,12 +25,13 @@ export default class GameScene extends Scene {
 			player_acting,
 			{ frameWidth: 32, frameHeight: 32 }
 		);
+		this.load.scenePlugin('Dialog', DialogPlugin);
 	}
 	
 	create() {
 		this.physics.world.TILE_BIAS = 32;
 		this.physics.world.OVERLAP_BIAS = 1; // we don't want to automatically resolve overlaps
-
+		
 		const map = this.make.tilemap({ key: 'map' });
 		const tileset = map.addTilesetImage('Tileset', 'tiles');
 		const walkableLayer = map.createStaticLayer('floor', tileset, 0, 0);
@@ -38,7 +41,7 @@ export default class GameScene extends Scene {
 		this._player = new Player(this);
 		this.physics.add.collider(this._player.sprite, wallLayer);
 	}
-	
+
 	update(time, delta) {
 		this._player.update();
 	}
