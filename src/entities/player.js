@@ -13,15 +13,15 @@ export default class Player {
 
     createAnimations(scene) {
         scene.anims.create({
-            key: 'horizontal',
-            frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 0, end: 19 }),
+            key: 'walking',
+            frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 0, end: 3 }),
             frameRate: 10,
             repeat: -1
         });
         scene.anims.create({
-            key: 'vertical',
-            frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 20, end: 39 }),
-            frameRate: 10,
+            key: 'standing',
+            frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 0, end: 0 }),
+            frameRate: 1,
             repeat: -1
         });
     }
@@ -31,7 +31,6 @@ export default class Player {
 
         if (!(left.isDown || right.isDown)) {
             this.sprite.setVelocityX(0);
-            this.sprite.anims.play('horizontal', true);
         }
         else {
             this.sprite.setVelocityX(left.isDown ? -SPEED : SPEED);
@@ -39,7 +38,6 @@ export default class Player {
 
         if (!(up.isDown || down.isDown)) {
             this.sprite.setVelocityY(0);
-            this.sprite.anims.play('vertical', true);
         }
         else {
             this.sprite.setVelocityY(up.isDown ? -SPEED : SPEED);
@@ -50,7 +48,20 @@ export default class Player {
         }
     }
 
+    _updateAnimation() {
+        if (this.sprite.body.velocity.x != 0 || this.sprite.body.velocity.y != 0) {
+            // we are moving!
+            this.sprite.anims.play('walking', true);
+        }
+        else {
+            this.sprite.anims.play('standing', true);
+        }
+        // rotate sprite according to body and correct different rotation systems
+        this.sprite.rotation = this.sprite.body.angle + Math.PI / 2;
+    }
+
     update() {
         this._updateMovement();
+        this._updateAnimation();
     }
 }

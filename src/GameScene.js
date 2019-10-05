@@ -1,7 +1,9 @@
 import { Scene } from 'phaser';
+
 import mapJson from './assets/ship2.json';
 import tiles from './assets/Tileset.png';
-import chara from './assets/textures.png'
+import player_acting from './assets/Dave acting.png'
+
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
 
@@ -18,8 +20,8 @@ export default class GameScene extends Scene {
 		this.load.image('tiles', tiles);
 		this.load.tilemapTiledJSON('map', mapJson);
 		this.load.spritesheet(PLAYER_TILESET_KEY,
-			chara,
-			{ frameWidth: 8, frameHeight: 8 }
+			player_acting,
+			{ frameWidth: 32, frameHeight: 32 }
 		);
 	}
 	
