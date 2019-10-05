@@ -1,6 +1,6 @@
 {
     "speech-001": {
-        "text": "Hello Dave!",
+        "text": "Hello Dave!<br>2nd line<br>3rd line<br>4 line<br>5th line",
         "menu": []
     },
     "speech-002": {

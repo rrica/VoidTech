@@ -1,25 +1,11 @@
-import Phaser from 'phaser';
-import GameScene from './GameScene';
+import GAME from './game';
+GAME.scale.on('resize', (gameSize, baseSize, displaySize) => resizeMenu(displaySize.width, displaySize.height));
 
-const config = {
-	type: Phaser.AUTO,
-	pixelArt: true,
-	parent: 'canvas-parent',
-	scale: {
-		parent: 'phaser',
-		mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
-		width: 320,
-		height: 200,
-		max: {
-			width: 1280,
-			height: 800
-		}
-	},
-	physics: {
-		default: 'arcade',
-		arcade: { debug: true }
-	},
-	scene: [GameScene]
-};
+console.log(GAME.scale);
 
-new Phaser.Game(config);
+const dialogContainer = document.getElementById('dialog-parent');
+
+function resizeMenu(width, height) {
+	dialogContainer.style.width = width + 'px';
+	dialogContainer.style.height = height + 'px';
+}

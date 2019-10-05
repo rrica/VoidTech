@@ -48,8 +48,8 @@ export default class Player {
         }
 
         if (Phaser.Input.Keyboard.JustDown(space)) {
-            if (this.dialogs.active()) {
-                this.dialogs.clear();
+            if (dialog.active) {
+                dialog.hide();
             }
             else {
                 this.scene.physics.overlap(this.sprite, this.scene.objects, (left, right) => {
