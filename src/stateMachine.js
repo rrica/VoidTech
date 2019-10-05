@@ -15,7 +15,6 @@ class StateMachine {
     init (player) {
         this.player = player;
         this.state = STATES.normal;
-        this.leverLogic = levers({ doorLayer: this.player.scene.doorLayer });
     }
 
     setState(state) {
@@ -55,7 +54,7 @@ class StateMachine {
             });
             this.player.scene.physics.overlap(this.player.sprite, this.player.scene.levers, (left, right) => {
                 const trigger = left === this.player.sprite ? right : left;
-                this.leverLogic[trigger.getData('action')]();
+                levers[trigger.getData('action')]();
             });
         }
     }
