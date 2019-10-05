@@ -3,8 +3,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>My game</title>
+	<style lang="css">
+		body {
+		  margin: 0;
+		  padding:0;
+		}
+		p {
+			margin: 0;
+		}
+		#dialog-parent {
+		display: flex;
+		justify-content: flex-end;
+		flex-direction: column;
+		  position: absolute;
+		  left: 0;
+		  top: 0;
+		}
+		#dialog {
+			background-color: black;
+			color: green; 
+			border-color: green;
+			border-style: dashed;
+			font-size: 24px;
+			margin: 16px;
+			min-height: 20px;
+			padding: 16px;
+			/* display: none; */
+		}
+	  </style>
 </head>
 <body>
 <div id="canvas-parent"></div>
+<div id="dialog-parent">
+	<div id="dialog">
+		<p id="text">test</p>
+		<div id="buttons"></div>
+	</div>
+</div>
+<template id="dialog-button"><button>test</button></template>
 <script type="text/javascript" src="main.js"></script></body>
 </html>
