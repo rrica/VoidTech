@@ -50,14 +50,14 @@ export default class Player {
 
     _updateAnimation() {
         if (this.sprite.body.velocity.x != 0 || this.sprite.body.velocity.y != 0) {
-            // we are moving!
             this.sprite.anims.play('walking', true);
+
+            // rotate sprite according to body and correct different rotation systems
+            this.sprite.rotation = this.sprite.body.angle + Math.PI / 2;
         }
         else {
             this.sprite.anims.play('standing', true);
         }
-        // rotate sprite according to body and correct different rotation systems
-        this.sprite.rotation = this.sprite.body.angle + Math.PI / 2;
     }
 
     update() {
