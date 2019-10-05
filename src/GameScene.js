@@ -8,6 +8,8 @@ import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
 import { DialogPlugin } from './plugins/dialog.js';
 
+import dialog from './dialog/dialog.js';
+
 export default class GameScene extends Scene {
 	constructor() {
 		super({ key: GameScene.KEY });
@@ -29,19 +31,20 @@ export default class GameScene extends Scene {
 	}
 
 	initializeObjects(tilemap) {
-		this._objects = this.physics.add.group();
+		this.objects = this.physics.add.group();
 
 		tilemap.getObjectLayer('objects').objects.forEach(obj => {
 			const sprite = this.physics.add.sprite(obj.x, obj.y, null);
 			sprite.setDisplaySize(obj.width, obj.height);
 			sprite.setOrigin(0, 0);
+			sprite.depth = -10;
 
 			// copy custom properties
 			obj.properties.forEach(prop => {
 				sprite.setData(prop.name, prop.value);
 			})
 
-			this._objects.add(sprite);
+			this.objects.add(sprite);
 		});
 	}
 	
@@ -56,40 +59,42 @@ export default class GameScene extends Scene {
 		wallLayer.setCollisionBetween(1, 999);
 
 		
-		this._player = new Player(this);
-		this.physics.add.collider(this._player.sprite, wallLayer);
+		this.player = new Player(this);
+		this.physics.add.collider(this.player.sprite, wallLayer);
 
 		this.initializeObjects(map);
 
+		dialog.init(this.Dialog, this, this.player);
+
 		//TODO: Move following code (object logic) to better place
 
-		const showDialog = (config) => {
-			if (!this.Dialog.active()) {
-				this.Dialog.show(config);
-			}
-		}
+		// const showDialog = (config) => {
+		// 	if (!this.Dialog.active()) {
+		// 		this.Dialog.show(config);
+		// 	}
+		// }
 
-		this.physics.add.overlap(
-			this._player.sprite, 
-			this._objects, 
-			(a, b) => {
-				const action = b.getData('action');
-				if (action) {
-					switch (action) {
-						case 'speech-001': 
-							showDialog({text: 'Hello Dave!'});
-							break;
-						case 'speech-002':
-							showDialog({text: 'What can I do for you?'});
-							break;
-						default:
-							console.warn('Unknown action')
-					}
-				}
-			});
+		// this.physics.add.overlap(
+		// 	this.player.sprite, 
+		// 	this.objects, 
+		// 	(a, b) => {
+		// 		const action = b.getData('action');
+		// 		if (action) {
+		// 			switch (action) {
+		// 				case 'speech-001': 
+		// 					showDialog({text: 'Hello Dave!'});
+		// 					break;
+		// 				case 'speech-002':
+		// 					showDialog({text: 'What can I do for you?'});
+		// 					break;
+		// 				default:
+		// 					console.warn('Unknown action')
+		// 			}
+		// 		}
+		// 	});
 	}
 
 	update(time, delta) {
-		this._player.update();
+		this.player.update();
 	}
 }

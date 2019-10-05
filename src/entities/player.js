@@ -2,6 +2,8 @@ const START_X = 40;
 const START_Y = 80;
 const SPEED = 40;
 export const PLAYER_TILESET_KEY = 'chara';
+import Phaser from 'phaser';
+import dialog from '../dialog/dialog.js';
 
 export default class Player {
 	constructor(scene) {
@@ -10,6 +12,7 @@ export default class Player {
         this.createAnimations(scene);
         this.__cursorkeys = scene.input.keyboard.createCursorKeys();
         this.dialogs = scene.Dialog;
+        this.scene = scene;
     }
 
     createAnimations(scene) {
@@ -47,6 +50,12 @@ export default class Player {
         if (Phaser.Input.Keyboard.JustDown(space)) {
             if (this.dialogs.active()) {
                 this.dialogs.clear();
+            }
+            else {
+                this.scene.physics.overlap(this.sprite, this.scene.objects, (left, right) => {
+                    const trigger = left === this.sprite ? right : left;
+                    dialog.show(trigger.getData('action'));
+                });
             }
         }
     }
