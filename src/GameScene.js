@@ -69,33 +69,6 @@ export default class GameScene extends Scene {
 		dialog.init(this.Dialog, this, this.player);
 
 		stateMachine.init(this.player);
-
-		//TODO: Move following code (object logic) to better place
-
-		// const showDialog = (config) => {
-		// 	if (!this.Dialog.active()) {
-		// 		this.Dialog.show(config);
-		// 	}
-		// }
-
-		// this.physics.add.overlap(
-		// 	this.player.sprite, 
-		// 	this.objects, 
-		// 	(a, b) => {
-		// 		const action = b.getData('action');
-		// 		if (action) {
-		// 			switch (action) {
-		// 				case 'speech-001': 
-		// 					showDialog({text: 'Hello Dave!'});
-		// 					break;
-		// 				case 'speech-002':
-		// 					showDialog({text: 'What can I do for you?'});
-		// 					break;
-		// 				default:
-		// 					console.warn('Unknown action')
-		// 			}
-		// 		}
-		// 	});
 	}
 
 	update(time, delta) {

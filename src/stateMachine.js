@@ -57,10 +57,20 @@ class StateMachine {
     updateDialog() {
         this.player.sprite.setVelocityX(0);
         this.player.sprite.setVelocityY(0);
-        const { space } = this.player.cursorkeys;
-        if (Phaser.Input.Keyboard.JustDown(space)) {
-            dialog.hide();
-            this.setState(STATES.normal);
+        const { up, down, space } = this.player.cursorkeys;
+        if (dialog.menu) {
+            if (Phaser.Input.Keyboard.JustDown(down) && document.activeElement.nextElementSibling) {
+                document.activeElement.nextElementSibling.focus();
+            }
+            if (Phaser.Input.Keyboard.JustDown(up) && document.activeElement.previousElementSibling) {
+                document.activeElement.previousElementSibling.focus();
+            }
+        }
+        else {
+            if (Phaser.Input.Keyboard.JustDown(space)) {
+                dialog.hide();
+                this.setState(STATES.normal);
+            }
         }
     }
 }
