@@ -61,8 +61,8 @@
                  "type":"",
                  "visible":true,
                  "width":19.4233404844291,
-                 "x":138.068029873126,
-                 "y":33.5409370242215
+                 "x":124.51555005767,
+                 "y":59.2041434832757
                 }],
          "offsetx":0,
          "offsety":-0.288350634371398,
@@ -76,7 +76,7 @@
  "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"1.2.4",
  "tileheight":16,
  "tilesets":[
         {
