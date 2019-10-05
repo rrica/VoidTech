@@ -10,7 +10,7 @@ export default class Player {
     }
 
     _updateMovement() {
-        const {left, right, up, down} = this.__cursorkeys;
+        const {left, right, up, down, space} = this.__cursorkeys;
 
         if (!(left.isDown || right.isDown)) {
             this.__image.setVelocityX(0);
@@ -24,6 +24,10 @@ export default class Player {
         }
         else {
             this.__image.setVelocityY(up.isDown ? -SPEED : SPEED);
+        }
+
+        if (space.isDown) {
+            console.log('Interaction!')
         }
     }
 
