@@ -29,7 +29,7 @@ export default class GameScene extends Scene {
 	}
 	
 	create() {
-		this.physics.world.TILE_BIAS = 32;
+		this.physics.world.TILE_BIAS = 8;
 		this.physics.world.OVERLAP_BIAS = 1; // we don't want to automatically resolve overlaps
 		
 		const map = this.make.tilemap({ key: 'map' });

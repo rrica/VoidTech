@@ -1,13 +1,13 @@
 const START_X = 40;
 const START_Y = 80;
-const SPEED = 32;
+const SPEED = 40;
 export const PLAYER_TILESET_KEY = 'chara';
 
 export default class Player {
 	constructor(scene) {
         this.sprite = scene.physics.add.sprite(START_X, START_Y, PLAYER_TILESET_KEY);
+        this.sprite.setSize(16, 16);
         this.createAnimations(scene);
-        // this.__image.setInteractive();
         this.__cursorkeys = scene.input.keyboard.createCursorKeys();
         this.dialogs = scene.Dialog;
     }
