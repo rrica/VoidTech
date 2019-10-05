@@ -24,5 +24,8 @@ export default {
     },
     "speech-003": {
         "text": "I don't have anything more to tell you."
+    },
+    "speech-004": {
+        "text": "Sounds like a heavy door just moved."
     }
 }

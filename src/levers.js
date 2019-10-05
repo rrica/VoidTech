@@ -1,3 +1,5 @@
+import dialog from './dialog/dialog.js';
+
 const TILE_INDEX_DOOR_CLOSED = 37;
 const TILE_INDEX_DOOR_OPENED = 38;
 
@@ -26,6 +28,7 @@ export default ({ doorLayer }) => {
             console.log('lever 002 used');
             toggleDoor(4, 11);
             toggleDoor(5, 11);
+            dialog.show('speech-004');
         },
     }
 }
