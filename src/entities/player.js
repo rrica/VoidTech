@@ -1,30 +1,48 @@
 const START_X = 4;
 const START_Y = 4;
 const SPEED = 16;
+export const PLAYER_TILESET_KEY = 'chara';
 
 export default class Player {
 	constructor(scene) {
-        // An Arcade Physics Image is an Image with an Arcade Physics body and related components.
-        this.arcadeImage = scene.physics.add.image(START_X, START_Y, 'chara');
+        this.sprite = scene.physics.add.sprite(START_X, START_Y, PLAYER_TILESET_KEY);
+        this.createAnimations(scene);
         // this.__image.setInteractive();
         this.__cursorkeys = scene.input.keyboard.createCursorKeys();
+    }
+
+    createAnimations(scene) {
+        scene.anims.create({
+            key: 'horizontal',
+            frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 0, end: 19 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        scene.anims.create({
+            key: 'vertical',
+            frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 20, end: 39 }),
+            frameRate: 10,
+            repeat: -1
+        });
     }
 
     _updateMovement() {
         const {left, right, up, down, space} = this.__cursorkeys;
 
         if (!(left.isDown || right.isDown)) {
-            this.arcadeImage.setVelocityX(0);
+            this.sprite.setVelocityX(0);
+            this.sprite.anims.play('horizontal', true);
         }
         else {
-            this.arcadeImage.setVelocityX(left.isDown ? -SPEED : SPEED);
+            this.sprite.setVelocityX(left.isDown ? -SPEED : SPEED);
         }
 
         if (!(up.isDown || down.isDown)) {
-            this.arcadeImage.setVelocityY(0);
+            this.sprite.setVelocityY(0);
+            this.sprite.anims.play('vertical', true);
         }
         else {
-            this.arcadeImage.setVelocityY(up.isDown ? -SPEED : SPEED);
+            this.sprite.setVelocityY(up.isDown ? -SPEED : SPEED);
         }
 
         if (space.isDown) {

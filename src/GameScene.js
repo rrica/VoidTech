@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 import mapJson from './assets/map.json';
 import tiles from './assets/brick-sheet.png';
 import chara from './assets/textures.png'
+import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
 
 export default class GameScene extends Scene {
@@ -16,7 +17,7 @@ export default class GameScene extends Scene {
 	preload() {
 		this.load.image('tiles', tiles);
 		this.load.tilemapTiledJSON('map', mapJson);
-		this.load.spritesheet('chara',
+		this.load.spritesheet(PLAYER_TILESET_KEY,
 			chara,
 			{ frameWidth: 8, frameHeight: 8 }
 		);
@@ -32,7 +33,7 @@ export default class GameScene extends Scene {
 		undestructibleLayer.setCollisionByProperty({ collision: true });
 
 		this._player = new Player(this);
-		this.physics.add.collider(this._player.arcadeImage, undestructibleLayer);
+		this.physics.add.collider(this._player.sprite, undestructibleLayer);
 	}
 	
 	update(time, delta) {
