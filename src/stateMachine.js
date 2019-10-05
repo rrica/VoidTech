@@ -55,12 +55,12 @@ class StateMachine {
     }
 
     updateDialog() {
+        this.player.sprite.setVelocityX(0);
+        this.player.sprite.setVelocityY(0);
         const { space } = this.player.cursorkeys;
         if (Phaser.Input.Keyboard.JustDown(space)) {
-            if (dialog.active) {
-                dialog.hide();
-                this.setState(STATES.normal);
-            }
+            dialog.hide();
+            this.setState(STATES.normal);
         }
     }
 }

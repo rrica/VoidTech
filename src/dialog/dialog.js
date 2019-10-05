@@ -19,7 +19,7 @@ class Dialog {
     }
 
     hide() {
-        this.dialogContainer.style.display = '';
+        this.dialogContainer.style.display = 'none';
     }
 
     get active() {
