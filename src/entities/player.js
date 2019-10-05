@@ -30,35 +30,35 @@ export default class Player {
         });
     }
 
-    _updateMovement() {
-        const {left, right, up, down, space} = this.cursorkeys;
+    // _updateMovement() {
+    //     const {left, right, up, down, space} = this.cursorkeys;
 
-        if (!(left.isDown || right.isDown)) {
-            this.sprite.setVelocityX(0);
-        }
-        else {
-            this.sprite.setVelocityX(left.isDown ? -SPEED : SPEED);
-        }
+    //     if (!(left.isDown || right.isDown)) {
+    //         this.sprite.setVelocityX(0);
+    //     }
+    //     else {
+    //         this.sprite.setVelocityX(left.isDown ? -SPEED : SPEED);
+    //     }
 
-        if (!(up.isDown || down.isDown)) {
-            this.sprite.setVelocityY(0);
-        }
-        else {
-            this.sprite.setVelocityY(up.isDown ? -SPEED : SPEED);
-        }
+    //     if (!(up.isDown || down.isDown)) {
+    //         this.sprite.setVelocityY(0);
+    //     }
+    //     else {
+    //         this.sprite.setVelocityY(up.isDown ? -SPEED : SPEED);
+    //     }
 
-        if (Phaser.Input.Keyboard.JustDown(space)) {
-            if (dialog.active) {
-                dialog.hide();
-            }
-            else {
-                this.scene.physics.overlap(this.sprite, this.scene.objects, (left, right) => {
-                    const trigger = left === this.sprite ? right : left;
-                    dialog.show(trigger.getData('action'));
-                });
-            }
-        }
-    }
+    //     if (Phaser.Input.Keyboard.JustDown(space)) {
+    //         if (dialog.active) {
+    //             dialog.hide();
+    //         }
+    //         else {
+    //             this.scene.physics.overlap(this.sprite, this.scene.objects, (left, right) => {
+    //                 const trigger = left === this.sprite ? right : left;
+    //                 dialog.show(trigger.getData('action'));
+    //             });
+    //         }
+    //     }
+    // }
 
     _updateAnimation() {
         if (this.sprite.body.velocity.x != 0 || this.sprite.body.velocity.y != 0) {
