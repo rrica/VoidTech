@@ -21,7 +21,7 @@ const toggleDoor = (x, y) => {
 };
 
 const toggleLever = (lever, action) => {
-    lever.setFrame(lever.frame.name + 1 % 2);
+    lever.setFrame((lever.frame.name + 1) % 2);
     action();
 }
 
