@@ -25,14 +25,29 @@ class StateMachine {
         switch (this.state) {
             case STATES.normal:
                 this.updateMovement();
+                this.handleInteractions();
                 break;
             case STATES.dialog:
                 this.updateDialog();
         }
     }
 
+    handleInteractions() {
+        const { space } = this.player.cursorkeys;
+        if (Phaser.Input.Keyboard.JustDown(space)) {
+            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.speechTriggers, (left, right) => {
+                const trigger = left === this.player.sprite ? right : left;
+                dialog.show(trigger.getData('action'));
+            });
+            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.levers, (left, right) => {
+                const trigger = left === this.player.sprite ? right : left;
+                levers[trigger.getData('action')](trigger);
+            });
+        }
+    }
+
     updateMovement() {
-        const { left, right, up, down, space } = this.player.cursorkeys;
+        const { left, right, up, down } = this.player.cursorkeys;
         if (!(left.isDown || right.isDown)) {
             this.player.sprite.setVelocityX(0);
         }
@@ -48,17 +63,6 @@ class StateMachine {
         }
 
         this._correctDiagonalMovementSpeed();
-
-        if (Phaser.Input.Keyboard.JustDown(space)) {
-            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.speechTriggers, (left, right) => {
-                const trigger = left === this.player.sprite ? right : left;
-                dialog.show(trigger.getData('action'));
-            });
-            this.player.scene.physics.overlap(this.player.sprite, this.player.scene.levers, (left, right) => {
-                const trigger = left === this.player.sprite ? right : left;
-                levers[trigger.getData('action')](trigger);
-            });
-        }
     }
 
     _correctDiagonalMovementSpeed() {
