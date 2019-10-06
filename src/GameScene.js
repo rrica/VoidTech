@@ -99,7 +99,7 @@ export default class GameScene extends Scene {
 
 		dialog.init(this.Dialog, this, this.player);
 		stateMachine.init(this.player);
-		//this.cameras.default.startFollow(this.player);
+		this.cameras.main.startFollow(this.player.sprite);
 	}
 
 	update(time, delta) {
