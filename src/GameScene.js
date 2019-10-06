@@ -9,6 +9,9 @@ import assets from './assets/Assets.png'
 import lever from './assets/lever.png'
 import AnimatedTiles from 'phaser-animated-tiles/dist/AnimatedTiles.min.js';
 
+import lightSwitchSound from './assets/sounds/Okt. 06, 830873-light-switch.ogg';
+import lightSwitchSoundAlternative from './assets/sounds/Okt. 06, 830873-light-switch-alternative.ogg';
+
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
 
@@ -21,6 +24,7 @@ export default class GameScene extends Scene {
 	constructor() {
 		super({ key: GameScene.KEY });
 		this.playerCollider = null;
+		this.sounds = {};
 	}
 	
 	static get KEY() {
@@ -48,7 +52,12 @@ export default class GameScene extends Scene {
 		);
 		this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
 		
+<<<<<<< HEAD
 		this.load.image('lightmap', lightmap);
+=======
+		this.load.audio('light-switch-1', lightSwitchSound);
+		this.load.audio('light-switch-2', lightSwitchSoundAlternative);
+>>>>>>> light switch soundeffect
 	}
 
 	initializeObjects(tilemap) {
@@ -127,6 +136,9 @@ export default class GameScene extends Scene {
 
 		console.log(spotlight);
 		this.cameras.main.setMask(new Phaser.Display.Masks.BitmapMask(this, spotlight));
+
+		this.sounds.lightSwitchSound = this.sound.add('light-switch-1');
+		this.sounds.lightSwitchSoundAlternative = this.sound.add('light-switch-2');
 	}
 
 	update(time, delta) {

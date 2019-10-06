@@ -43,6 +43,7 @@ class StateMachine {
                 const trigger = left === this.player.sprite ? right : left;
                 levers[trigger.getData('action')](trigger);
             });
+            this.player.scene.sounds.lightSwitchSound.play();
         }
     }
 
