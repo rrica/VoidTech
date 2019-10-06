@@ -4,6 +4,7 @@ import mapJson from './assets/ship2.json';
 import tiles from './assets/Tileset.png';
 import player_acting from './assets/Dave acting.png'
 import door from './assets/door.png'
+import lever from './assets/lever.png'
 
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
@@ -34,6 +35,10 @@ export default class GameScene extends Scene {
 			door,
 			{ frameWidth: 16, frameHeight: 16 }
 		);
+		this.load.spritesheet('lever',
+			lever,
+			{ frameWidth: 16, frameHeight: 16 }
+		);
 		this.load.scenePlugin('Dialog', DialogPlugin);
 	}
 
@@ -42,20 +47,26 @@ export default class GameScene extends Scene {
 		this.levers = this.physics.add.group();
 
 		tilemap.getObjectLayer('objects').objects.forEach(obj => {
-			const sprite = this.physics.add.sprite(obj.x, obj.y, null);
-			sprite.setDisplaySize(obj.width, obj.height);
-			sprite.setOrigin(0, 0);
-			sprite.depth = -10;
-
-			// copy custom properties
-			obj.properties.forEach(prop => {
-				sprite.setData(prop.name, prop.value);
-			})
-
+			const commonSpritePostProcessing = (sprite) => {
+				sprite.setDisplaySize(obj.width, obj.height);
+				sprite.setOrigin(0, 0);
+				// copy custom properties
+				obj.properties.forEach(prop => {
+					sprite.setData(prop.name, prop.value);
+				});
+			}
 			if (obj.name === "trigger") {
+				const sprite = this.physics.add.sprite(obj.x, obj.y, null);
+				commonSpritePostProcessing(sprite);
+				sprite.depth = -10;
 				this.speechTriggers.add(sprite);
 			}
 			else if (obj.name === "lever") {
+				// a freaking 8 year old bug in tiled drove me mad…
+				// https://github.com/bjorn/tiled/issues/91
+				const posY = obj.gid ? obj.y - obj.height : obj.y;
+				const sprite = this.physics.add.sprite(obj.x, posY, 'lever');
+				commonSpritePostProcessing(sprite);
 				this.levers.add(sprite);
 			}
 		});

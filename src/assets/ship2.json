@@ -65,8 +65,9 @@
                  "y":59.2041434832757
                 }, 
                 {
-                 "height":12.1107266435986,
-                 "id":3,
+                 "gid":39,
+                 "height":16,
+                 "id":8,
                  "name":"lever",
                  "properties":[
                         {
@@ -77,13 +78,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":20.7612456747405,
-                 "x":123.125720876586,
-                 "y":100.922722029988
+                 "width":16,
+                 "x":16.79815455594,
+                 "y":111.517877739331
                 }, 
                 {
-                 "height":12.1107,
-                 "id":5,
+                 "gid":39,
+                 "height":16,
+                 "id":9,
                  "name":"lever",
                  "properties":[
                         {
@@ -94,9 +96,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":20.7612,
-                 "x":17.0127102652826,
-                 "y":99.4809821799308
+                 "width":16,
+                 "x":127.524798154556,
+                 "y":128.818915801615
                 }],
          "offsetx":0,
          "offsety":-0.288350634371398,
@@ -119,7 +121,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":6,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -168,6 +170,19 @@
                          "value":false
                         }]
                 }],
+         "tilewidth":16
+        }, 
+        {
+         "columns":2,
+         "firstgid":39,
+         "image":"lever.png",
+         "imageheight":16,
+         "imagewidth":32,
+         "margin":0,
+         "name":"lever",
+         "spacing":0,
+         "tilecount":2,
+         "tileheight":16,
          "tilewidth":16
         }],
  "tilewidth":16,
