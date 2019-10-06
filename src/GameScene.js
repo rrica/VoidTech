@@ -1,7 +1,7 @@
 import { Scene } from 'phaser';
 
-import mapJson from './assets/ship2.json';
-import tiles from './assets/Tileset.png';
+import mapJson from './assets/ship.json';
+import tiles from './assets/Tiles.png';
 import player_acting from './assets/Dave acting.png'
 import door from './assets/door.png'
 import lever from './assets/lever.png'
@@ -78,7 +78,7 @@ export default class GameScene extends Scene {
 		this.physics.world.OVERLAP_BIAS = 1; // we don't want to automatically resolve overlaps
 		
 		const map = this.make.tilemap({ key: 'map' });
-		const tileset = map.addTilesetImage('Tileset', 'tiles');
+		const tileset = map.addTilesetImage('Tiles', 'tiles');
 		const doorTileset = map.addTilesetImage('door');
 		const walkableLayer = map.createStaticLayer('floor', tileset, 0, 0);
 		const wallLayer = map.createStaticLayer('walls', tileset, 0, 0);
@@ -93,12 +93,13 @@ export default class GameScene extends Scene {
 		this.player = new Player(this);
 		this.physics.add.collider(this.player.sprite, wallLayer);
 		this.physics.add.collider(this.player.sprite, this.doorLayer);
+		this.physics.add.collider(this.player.sprite, this.animatedLayer);
 
 		this.initializeObjects(map);
 
 		dialog.init(this.Dialog, this, this.player);
-
 		stateMachine.init(this.player);
+		//this.cameras.default.startFollow(this.player);
 	}
 
 	update(time, delta) {
