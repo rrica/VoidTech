@@ -3,8 +3,8 @@ import stateMachine from '../stateMachine.js';
 import { STATES } from '../stateMachine.js';
 
 const speakerImages = {
-    lisa: '../assets/Lisa-talking.gif',
-    dave: '../assets/Dave-talking.gif'
+    lisa: './assets/Lisa-talking.gif',
+    dave: './assets/Dave-talking.gif'
 }
 
 class Dialog {
