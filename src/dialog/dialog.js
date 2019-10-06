@@ -2,9 +2,12 @@ import dialogContent from './dialogContent.js';
 import stateMachine from '../stateMachine.js';
 import { STATES } from '../stateMachine.js';
 
+import lisa from '../assets/Lisa-talking.gif';
+import dave from '../assets/Dave-talking.gif';
+
 const speakerImages = {
-    lisa: './assets/Lisa-talking.gif',
-    dave: './assets/Dave-talking.gif'
+    lisa,
+    dave
 }
 
 class Dialog {
