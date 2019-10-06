@@ -4,6 +4,7 @@ import stateMachine from '../stateMachine';
 export default {
     "speech-001": {
         "text": "Hello Dave!<br>2nd line<br>3rd line<br>4 line<br>5th line",
+        "speaker": "lisa",
         "buttons": [
             {
                 "text": "I want to hear more",
@@ -20,12 +21,15 @@ export default {
     },
     "speech-002": {
         "text": "What can I do for you?",
+        "speaker": "lisa",
         "action": () => alert('always happens after this dialog')
     },
     "speech-003": {
-        "text": "I don't have anything more to tell you."
+        "text": "I don't have anything more to tell you.",
+        "speaker": "lisa"
     },
     "speech-004": {
-        "text": "Sounds like a heavy door just moved."
+        "text": "Sounds like a heavy door just moved.",
+        "speaker": "dave"
     }
 }

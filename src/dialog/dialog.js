@@ -2,6 +2,11 @@ import dialogContent from './dialogContent.js';
 import stateMachine from '../stateMachine.js';
 import { STATES } from '../stateMachine.js';
 
+const speakerImages = {
+    lisa: './src/assets/Lisa-talking.gif',
+    dave: './src/assets/Dave-talking.gif'
+}
+
 class Dialog {
     init (dialogPlugin, scene, player) {
         this.dialogPlugin = dialogPlugin;
@@ -11,6 +16,7 @@ class Dialog {
         this.dialogText = document.getElementById('text');
         this.buttonTemplate = document.getElementById('dialog-button');
         this.buttons = document.getElementById('buttons');
+        this.speaker = document.getElementById('speaker');
         this.currentDialog = undefined;
     }
 
@@ -25,6 +31,15 @@ class Dialog {
         if (this.menu) {
             this.createButtons();
         }
+        if (this.speaker) {
+            this.createSpeaker()
+        }
+    }
+
+    createSpeaker() {
+        const img = document.createElement('img');
+        img.src = speakerImages[this.currentDialog.speaker];
+        this.speaker.appendChild(img);
     }
 
     createButtons() {
@@ -54,6 +69,7 @@ class Dialog {
             this.currentDialog.action();
         }
         this.currentDialog = undefined;
+        this.speaker.innerHTML = '';
     }
 
     get active() {
