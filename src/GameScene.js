@@ -155,7 +155,6 @@ export default class GameScene extends Scene {
 		this.sounds.walkingWood2 = this.sound.add('walking-wood-2');
 		this.sounds.walkingWood3 = this.sound.add('walking-wood-3');
 		this.sounds.walkingMetal1 = this.sound.add('walking-metal-1');
-		this.player.initSounds(this);
 	}
 
 	update(time, delta) {

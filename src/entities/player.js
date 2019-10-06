@@ -19,13 +19,6 @@ export default class Player {
         this.scene = scene;
     }
 
-    initSounds(scene) {
-        this.sounds = {
-            walkingOnMetal: scene.sounds.walkingMetal1,
-            walkingOnWood: scene.sounds.walkingWood2
-        };
-    }
-
     createAnimations(scene) {
         scene.anims.create({
             key: 'walking',
@@ -88,29 +81,32 @@ export default class Player {
     }
 
     _updateWalkingSound() {
+        const walkingOnWoodSound = this.scene.sounds.walkingWood2;
+        const walkingOnMetalSound = this.scene.sounds.walkingMetal1;
+
         const tileStandingOn = this.scene.walkableLayer.getTileAtWorldXY(this.sprite.x, this.sprite.y);
         const tileCurrentlyStandingOnId = getTiledIdFromPhaserTileIndex(this.scene.walkableLayer, tileStandingOn.index);
         const currentFloorType = this._getFloorType(tileCurrentlyStandingOnId);
 
         if (!this._isMoving(this.sprite.body.velocity)) {
-            this.sounds.walkingOnWood.stop();
-            this.sounds.walkingOnMetal.stop();
+            walkingOnWoodSound.stop();
+            walkingOnMetalSound.stop();
         }
         else {
             if (currentFloorType === 'metal') {
-                if (this.sounds.walkingOnWood.isPlaying) {
-                    this.sounds.walkingOnWood.stop();
+                if (walkingOnWoodSound.isPlaying) {
+                    walkingOnWoodSound.stop();
                 }
-                if (!this.sounds.walkingOnMetal.isPlaying) {
-                    this.sounds.walkingOnMetal.play({loop: false});
+                if (!walkingOnMetalSound.isPlaying) {
+                    walkingOnMetalSound.play({loop: false});
                 }
             }
             else {
-                if (this.sounds.walkingOnMetal.isPlaying) {
-                    this.sounds.walkingOnMetal.stop();
+                if (walkingOnMetalSound.isPlaying) {
+                    walkingOnMetalSound.stop();
                 }
-                if (!this.sounds.walkingOnWood.isPlaying) {
-                    this.sounds.walkingOnWood.play({loop: false});
+                if (!walkingOnWoodSound.isPlaying) {
+                    walkingOnWoodSound.play({loop: false});
                 }
             }
         }
