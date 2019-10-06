@@ -32,4 +32,8 @@ export default {
         "text": "Sounds like a heavy door just moved.",
         "speaker": "dave"
     }
+    "speech-awakening": {
+    "text": "Where am I? I don’t remember anything…<br>“Hello? Anybody there?”<br>Maybe the computer can give me some answers.",
+    "speaker": "dave",
+    },
 }
