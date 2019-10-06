@@ -4,6 +4,10 @@ const SPEED = 40;
 export const PLAYER_TILESET_KEY = 'chara';
 import Phaser from 'phaser';
 import dialog from '../dialog/dialog.js';
+import { getTiledIdFromPhaserTileIndex } from '../dynamic-tilemap-layer-helper.js';
+
+const TILED_TILE_ID_METAL_FLOOR = 39;
+const TILED_TILE_ID_WOOD_FLOOR = 38;
 
 export default class Player {
 	constructor(scene) {
@@ -13,6 +17,13 @@ export default class Player {
         this.cursorkeys = scene.input.keyboard.createCursorKeys();
         this.dialogs = scene.Dialog;
         this.scene = scene;
+    }
+
+    initSounds(scene) {
+        this.sounds = {
+            walkingOnMetal: scene.sounds.walkingMetal1,
+            walkingOnWood: scene.sounds.walkingWood2
+        };
     }
 
     createAnimations(scene) {
@@ -69,6 +80,48 @@ export default class Player {
         }
         else {
             this.sprite.anims.play('standing', true);
+        }
+    }
+
+    _isMoving(velocity) {
+        return velocity.x != 0 || velocity.y != 0;
+    }
+
+    _updateWalkingSound() {
+        const tileStandingOn = this.scene.walkableLayer.getTileAtWorldXY(this.sprite.x, this.sprite.y);
+        const tileCurrentlyStandingOnId = getTiledIdFromPhaserTileIndex(this.scene.walkableLayer, tileStandingOn.index);
+        const currentFloorType = this._getFloorType(tileCurrentlyStandingOnId);
+
+        if (!this._isMoving(this.sprite.body.velocity)) {
+            this.sounds.walkingOnWood.stop();
+            this.sounds.walkingOnMetal.stop();
+        }
+        else {
+            if (currentFloorType === 'metal') {
+                if (this.sounds.walkingOnWood.isPlaying) {
+                    this.sounds.walkingOnWood.stop();
+                }
+                if (!this.sounds.walkingOnMetal.isPlaying) {
+                    this.sounds.walkingOnMetal.play({loop: false});
+                }
+            }
+            else {
+                if (this.sounds.walkingOnMetal.isPlaying) {
+                    this.sounds.walkingOnMetal.stop();
+                }
+                if (!this.sounds.walkingOnWood.isPlaying) {
+                    this.sounds.walkingOnWood.play({loop: false});
+                }
+            }
+        }
+    }
+
+    _getFloorType(tileId) {
+        if (tileId === TILED_TILE_ID_METAL_FLOOR) {
+            return 'metal';
+        }
+        else {
+            return 'wood';
         }
     }
 
