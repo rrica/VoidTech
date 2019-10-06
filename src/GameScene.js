@@ -5,10 +5,11 @@ import tiles from './assets/Tileset.png';
 import player_acting from './assets/Dave acting.png'
 import door from './assets/door.png'
 import lever from './assets/lever.png'
+import AnimatedTiles from 'phaser-animated-tiles/dist/AnimatedTiles.min.js';
 
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
-import { DialogPlugin } from './plugins/dialog.js';
+
 
 import dialog from './dialog/dialog.js';
 
@@ -39,7 +40,7 @@ export default class GameScene extends Scene {
 			lever,
 			{ frameWidth: 16, frameHeight: 16 }
 		);
-		this.load.scenePlugin('Dialog', DialogPlugin);
+        this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
 	}
 
 	initializeObjects(tilemap) {
@@ -84,9 +85,11 @@ export default class GameScene extends Scene {
 		wallLayer.setCollisionBetween(1, 999);
 		this.doorLayer = map.createDynamicLayer('doors', doorTileset, 0, 0);
 		this.doorLayer.setCollisionByProperty({ collision: true });
+		this.animatedLayer = map.createDynamicLayer('animated', tileset, 0, 0);
+		this.animatedLayer.setCollisionByProperty({ collision: true });
 
+        this.sys.animatedTiles.init(map);
 
-		
 		this.player = new Player(this);
 		this.physics.add.collider(this.player.sprite, wallLayer);
 		this.physics.add.collider(this.player.sprite, this.doorLayer);
