@@ -47,6 +47,8 @@ class StateMachine {
             this.player.sprite.setVelocityY(up.isDown ? -constants.speed : constants.speed);
         }
 
+        this._correctDiagonalMovementSpeed();
+
         if (Phaser.Input.Keyboard.JustDown(space)) {
             this.player.scene.physics.overlap(this.player.sprite, this.player.scene.speechTriggers, (left, right) => {
                 const trigger = left === this.player.sprite ? right : left;
@@ -56,6 +58,16 @@ class StateMachine {
                 const trigger = left === this.player.sprite ? right : left;
                 levers[trigger.getData('action')](trigger);
             });
+        }
+    }
+
+    _correctDiagonalMovementSpeed() {
+        const velocity = this.player.sprite.body.velocity;
+        if (velocity.x != 0 && velocity.y != 0) {
+            // Pythagoras!
+            const desiredSpeed = Math.sqrt((constants.speed * constants.speed) / 2);
+            this.player.sprite.setVelocityX(desiredSpeed * Math.sign(velocity.x));
+            this.player.sprite.setVelocityY(desiredSpeed * Math.sign(velocity.y));
         }
     }
 
