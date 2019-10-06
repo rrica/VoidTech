@@ -11,6 +11,9 @@ import AnimatedTiles from 'phaser-animated-tiles/dist/AnimatedTiles.min.js';
 
 import lightSwitchSound from './assets/sounds/Okt. 06, 830873-light-switch.ogg';
 import lightSwitchSoundAlternative from './assets/sounds/Okt. 06, 830873-light-switch-alternative.ogg';
+import walkingWood1 from './assets/sounds/Okt. 06, 508575-steps-wood.ogg';
+import walkingWood2 from './assets/sounds/Okt. 06, 022498-walking-wood.ogg';
+import walkingWood3 from './assets/sounds/Okt. 06, 969136-walking-wood-alternative.ogg';
 
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
@@ -52,12 +55,13 @@ export default class GameScene extends Scene {
 		);
 		this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
 		
-<<<<<<< HEAD
 		this.load.image('lightmap', lightmap);
-=======
+
 		this.load.audio('light-switch-1', lightSwitchSound);
 		this.load.audio('light-switch-2', lightSwitchSoundAlternative);
->>>>>>> light switch soundeffect
+		this.load.audio('walking-wood-1', walkingWood1);
+		this.load.audio('walking-wood-3', walkingWood2);
+		this.load.audio('walking-wood-2', walkingWood3);
 	}
 
 	initializeObjects(tilemap) {
@@ -137,8 +141,11 @@ export default class GameScene extends Scene {
 		console.log(spotlight);
 		this.cameras.main.setMask(new Phaser.Display.Masks.BitmapMask(this, spotlight));
 
-		this.sounds.lightSwitchSound = this.sound.add('light-switch-1');
-		this.sounds.lightSwitchSoundAlternative = this.sound.add('light-switch-2');
+		this.sounds.lightSwitch = this.sound.add('light-switch-1');
+		this.sounds.lightSwitchAlternative = this.sound.add('light-switch-2');
+		this.sounds.walkingWood1 = this.sound.add('walking-wood-1');
+		this.sounds.walkingWood2 = this.sound.add('walking-wood-2');
+		this.sounds.walkingWood3 = this.sound.add('walking-wood-3');
 	}
 
 	update(time, delta) {
