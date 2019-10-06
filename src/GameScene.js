@@ -7,11 +7,11 @@ import player_acting from './assets/Dave acting.png'
 import door from './assets/door.png'
 import assets from './assets/Assets.png'
 import lever from './assets/lever.png'
+import lights from './assets/Lights.png'
 import AnimatedTiles from 'phaser-animated-tiles/dist/AnimatedTiles.min.js';
 
 import { PLAYER_TILESET_KEY } from './entities/player.js';
 import Player from './entities/player.js';
-
 
 import dialog from './dialog/dialog.js';
 
@@ -44,6 +44,10 @@ export default class GameScene extends Scene {
 		);
 		this.load.spritesheet('lever',
 			lever,
+			{ frameWidth: 16, frameHeight: 16 }
+		);
+		this.load.spritesheet('lights',
+			lights,
 			{ frameWidth: 16, frameHeight: 16 }
 		);
 		this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
@@ -88,6 +92,7 @@ export default class GameScene extends Scene {
 		const map = this.make.tilemap({ key: 'map' });
 		const tileset = map.addTilesetImage('Tiles', 'tiles');
 		const animatedTileset = map.addTilesetImage('Assets', 'assets');
+		const lightsTileset = map.addTilesetImage('Lights', 'lights');
 		const doorTileset = map.addTilesetImage('door');
 		const walkableLayer = map.createStaticLayer('floor', tileset, 0, 0);
 		const wallLayer = map.createStaticLayer('walls', tileset, 0, 0);
@@ -96,6 +101,7 @@ export default class GameScene extends Scene {
 		this.doorLayer.setCollisionByProperty({ collision: true });
 		this.animatedLayer = map.createDynamicLayer('animated', animatedTileset, 0, 0);
 		this.animatedLayer.setCollisionBetween(1, 999);
+		this.animatedLayer = map.createDynamicLayer('lamps', lightsTileset, 0, 0);
 
         this.sys.animatedTiles.init(map);
 
