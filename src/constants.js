@@ -1,3 +1,3 @@
 export default {
-    speed: 40
+    speed: 80
 }
