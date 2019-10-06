@@ -54,7 +54,7 @@ class StateMachine {
             });
             this.player.scene.physics.overlap(this.player.sprite, this.player.scene.levers, (left, right) => {
                 const trigger = left === this.player.sprite ? right : left;
-                levers[trigger.getData('action')]();
+                levers[trigger.getData('action')](trigger);
             });
         }
     }
