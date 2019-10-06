@@ -19,7 +19,7 @@ export default class Player {
         scene.anims.create({
             key: 'walking',
             frames: scene.anims.generateFrameNumbers(PLAYER_TILESET_KEY, { start: 0, end: 3 }),
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1
         });
         scene.anims.create({
