@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 
 import mapJson from './assets/ship.json';
 import tiles from './assets/Tiles.png';
+import lightmap from './assets/lightmap.png';
 import player_acting from './assets/Dave acting.png'
 import door from './assets/door.png'
 import assets from './assets/Assets.png'
@@ -45,7 +46,9 @@ export default class GameScene extends Scene {
 			lever,
 			{ frameWidth: 16, frameHeight: 16 }
 		);
-        this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
+		this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
+		
+		this.load.image('lightmap', lightmap);
 	}
 
 	initializeObjects(tilemap) {
@@ -106,10 +109,29 @@ export default class GameScene extends Scene {
 		dialog.init(this.Dialog, this, this.player);
 		stateMachine.init(this.player);
 		this.cameras.main.startFollow(this.player.sprite);
+		const spotlight = this.make.sprite({
+			key: 'lightmap',
+			x: 380,
+			y: 220,
+			add: false
+		});
+
+		spotlight.update = () => {
+			spotlight.x = Math.round(32 + this.game.config.width - this.cameras.main.scrollX);
+			spotlight.y = Math.round(96 + this.game.config.height - this.cameras.main.scrollY);
+		}
+
+		console.log(this.cameras.main);
+
+		this.spotlight = spotlight;
+
+		console.log(spotlight);
+		this.cameras.main.setMask(new Phaser.Display.Masks.BitmapMask(this, spotlight));
 	}
 
 	update(time, delta) {
 		stateMachine.update();
 		this.player.update();
+		this.spotlight.update();
 	}
 }
